@@ -92,7 +92,7 @@ func (s *ProxyServer) handleNHTCPClient(cs *Session) error {
 			err = json.Unmarshal(data, &req)
 			if err != nil {
 				s.policy.ApplyMalformedPolicy(cs.ip)
-				log.Printf("Malformed stratum request from %s: %v", cs.ip, err)
+				//log.Printf("Malformed stratum request from %s: %v", cs.ip, err)
 				return err
 			}
 			s.setDeadline(cs.conn)
@@ -217,12 +217,12 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		var params []string
 		err := json.Unmarshal(req.Params, &params)
 		if err != nil {
-			log.Println("Malformed stratum request params from", cs.ip)
+			//log.Println("Malformed stratum request params from", cs.ip)
 			return err
 		}
 
 		if params[1] != "EthereumStratum/1.0.0" {
-			log.Println("Unsupported stratum version from ", cs.ip)
+			//log.Println("Unsupported stratum version from ", cs.ip)
 			return cs.sendTCPNHError(req.Id, "unsupported ethereum version")
 		}
 
@@ -251,7 +251,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		}
 
 		paramsDiff := []float64{
-			s.config.Proxy.DifficultyNiceHash,
+			s.config.Proxy.Difficulty,
 		}
 		respReq := JSONRpcReqNH{Method: "mining.set_difficulty", Params: paramsDiff}
 		if err := cs.sendTCPNHReq(respReq); err != nil {
