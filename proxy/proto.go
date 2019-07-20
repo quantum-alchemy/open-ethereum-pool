@@ -36,10 +36,10 @@ type JSONRpcResp struct {
 }
 
 type JSONRpcRespNH struct {
-    Result  interface{}      `json:"result"`
+	Id      json.RawMessage `json:"id"`
+	Result  interface{}      `json:"result"`
     //Error   interface{}      `json:"error,omitempty"`
     Error   interface{}      `json:"error"`
-    Id      *json.RawMessage `json:"id"`
 }
 
 
