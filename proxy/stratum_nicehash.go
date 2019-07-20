@@ -135,7 +135,7 @@ func (cs *Session) getNotificationResponse(s *ProxyServer, id *json.RawMessage) 
 	return resp
 }
 
-func (cs *Session) sendTCPNHError(id *json.RawMessage, message interface{}) error {
+func (cs *Session) sendTCPNHError(id json.RawMessage, message interface{}) error {
 	cs.Mutex.Lock()
 	defer cs.Mutex.Unlock()
 
