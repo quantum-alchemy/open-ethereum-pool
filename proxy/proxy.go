@@ -36,6 +36,12 @@ type ProxyServer struct {
 	timeout    time.Duration
 }
 
+type jobDetails struct {
+    JobID string
+    SeedHash string
+    HeaderHash string
+}
+
 type Session struct {
 	ip  string
 	enc *json.Encoder
@@ -44,6 +50,9 @@ type Session struct {
 	sync.Mutex
 	conn  net.Conn
 	login string
+    subscriptionID string
+    Extranonce         string
+    JobDetails jobDetails
 }
 
 func NewProxy(cfg *Config, backend *storage.RedisClient) *ProxyServer {
@@ -66,6 +75,10 @@ func NewProxy(cfg *Config, backend *storage.RedisClient) *ProxyServer {
 		proxy.sessions = make(map[*Session]struct{})
 		go proxy.ListenTCP()
 	}
+
+    if cfg.Proxy.StratumNiceHash.Enabled {
+        go proxy.ListenNiceHashTCP()
+    }
 
 	proxy.fetchBlockTemplate()
 

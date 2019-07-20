@@ -36,6 +36,7 @@ type Proxy struct {
 	BehindReverseProxy   bool   `json:"behindReverseProxy"`
 	BlockRefreshInterval string `json:"blockRefreshInterval"`
 	Difficulty           int64  `json:"difficulty"`
+    DifficultyNiceHash   float64 `json:"difficultyNiceHash"`
 	StateUpdateInterval  string `json:"stateUpdateInterval"`
 	HashrateExpiration   string `json:"hashrateExpiration"`
 
@@ -45,6 +46,9 @@ type Proxy struct {
 	HealthCheck bool  `json:"healthCheck"`
 
 	Stratum Stratum `json:"stratum"`
+
+	StratumNiceHash StratumNiceHash `json:"stratum_nice_hash"`
+
 }
 
 type Stratum struct {
@@ -55,6 +59,13 @@ type Stratum struct {
 	TLS      bool   `json:"tls"`
 	CertFile string `json:"certFile"`
 	KeyFile  string `json:"keyFile"`
+}
+
+type StratumNiceHash struct {
+    Enabled bool   `json:"enabled"`
+    Listen  string `json:"listen"`
+    Timeout string `json:"timeout"`
+	MaxConn int    `json:"maxConn"`	
 }
 
 type Upstream struct {
