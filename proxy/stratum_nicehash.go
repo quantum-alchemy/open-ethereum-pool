@@ -135,7 +135,7 @@ func (cs *Session) getNotificationResponse(s *ProxyServer, id *json.RawMessage) 
 	return resp
 }
 
-func (cs *Session) sendTCPNHError(id *json.RawMessage, message interface{}) error {
+func (cs *Session) sendTCPNHError(id json.RawMessage, message interface{}) error {
 	cs.Mutex.Lock()
 	defer cs.Mutex.Unlock()
 
@@ -222,7 +222,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		}
 
 		if params[1] != "EthereumStratum/1.0.0" {
-			log.Println("Unsupported stratum version from ", cs.ip)
+			//log.Println("Unsupported stratum version from ", cs.ip)
 			return cs.sendTCPNHError(req.Id, "unsupported ethereum version")
 		}
 
