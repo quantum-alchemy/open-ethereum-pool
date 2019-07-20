@@ -67,7 +67,7 @@ func (s *ProxyServer) handleNHTCPClient(cs *Session) error {
 	connbuff := bufio.NewReaderSize(cs.conn, MaxReqSize)
 	s.setDeadline(cs.conn)
 
-	log.Println("--- handleNHTCPClient, IP: ", cs.ip)
+	//log.Println("--- handleNHTCPClient, IP: ", cs.ip)
 
 	for {
 		data, isPrefix, err := connbuff.ReadLine()
