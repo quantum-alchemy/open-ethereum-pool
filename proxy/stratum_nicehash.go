@@ -135,7 +135,7 @@ func (cs *Session) getNotificationResponse(s *ProxyServer, id *json.RawMessage) 
 	return resp
 }
 
-func (cs *Session) sendTCPNHError(id json.RawMessage, message interface{}) error {
+func (cs *Session) sendTCPNHError(id *json.RawMessage, message interface{}) error {
 	cs.Mutex.Lock()
 	defer cs.Mutex.Unlock()
 
@@ -215,14 +215,14 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 	switch req.Method {
 	case "mining.subscribe":
 		var params []string
-		err := json.Unmarshal(req.Params, &params)
+		err := json.Unmarshal(*req.Params, &params)
 		if err != nil {
 			log.Println("Malformed stratum request params from", cs.ip)
 			return err
 		}
 
 		if params[1] != "EthereumStratum/1.0.0" {
-			//log.Println("Unsupported stratum version from ", cs.ip)
+			log.Println("Unsupported stratum version from ", cs.ip)
 			return cs.sendTCPNHError(req.Id, "unsupported ethereum version")
 		}
 
@@ -231,7 +231,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 
 	case "mining.authorize":
 		var params []string
-		err := json.Unmarshal(req.Params, &params)
+		err := json.Unmarshal(*req.Params, &params)
 		if err != nil {
 			return errors.New("invalid params")
 		}
@@ -264,7 +264,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 
 	case "mining.submit":
 		var params []string
-		if err := json.Unmarshal(req.Params, &params); err != nil {
+		if err := json.Unmarshal(*req.Params, &params); err != nil {
 			log.Println("mining.submit: json.Unmarshal fail")
 			return err
 		}
