@@ -14,6 +14,7 @@
 **DISCLAIMER: At the time of this push, the Nicehash support works, but I'm not responsible for any changes Nicehash might do in the future that would break the compatibility. Even so, will do my best to make this work. **
 
 Steps:
+	*General
     git config --global http.https://gopkg.in.followRedirects true
     git clone https://github.com/quantum-alchemy/open-ethereum-pool.git
     cd open-ethereum-pool
@@ -28,7 +29,7 @@ Steps:
 	*Launch pool
 	./build/bin/open-ethereum-pool config.json
 
-	
+	(Marco P.)
 ### Features
 
 **This pool is no longer supported, expect only casual fixes.**
