@@ -86,7 +86,7 @@ func (s *ProxyServer) handleNHTCPClient(cs *Session) error {
 
 		if len(data) > 1 {
 			// DEBUG TRAFFIC
-			//log.Printf(">>> %s\n", data)
+			log.Printf(">>> %s\n", data)
 
 			var req StratumReq
 			err = json.Unmarshal(data, &req)
@@ -142,8 +142,8 @@ func (cs *Session) sendTCPNHError(id json.RawMessage, message interface{}) error
 	resp := JSONRpcRespNH{Id: id, Error: message}
 
 	// DEBUG TRAFFIC
-	//foo, _ := json.Marshal(resp)
-	//log.Printf("<<< %s", string(foo))
+	foo, _ := json.Marshal(resp)
+	log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
@@ -153,8 +153,8 @@ func (cs *Session) sendTCPNHResult(resp JSONRpcRespNH) error {
 	defer cs.Mutex.Unlock()
 	
 	// DEBUG TRAFFIC
-	//foo, _ := json.Marshal(resp)
-	//log.Printf("<<< %s", string(foo))
+	foo, _ := json.Marshal(resp)
+	log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
@@ -164,8 +164,8 @@ func (cs *Session) sendTCPNHReq(resp JSONRpcReqNH) error {
 	defer cs.Mutex.Unlock()
 	
 	// DEBUG TRAFFIC
-	//foo, _ := json.Marshal(resp)
-	//log.Printf("<<< %s", string(foo))
+	foo, _ := json.Marshal(resp)
+	log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
@@ -210,7 +210,7 @@ func (cs *Session) sendJob(s *ProxyServer, id json.RawMessage) error {
 
 func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 	// Handle RPC methods
-	//log.Printf(">>> handleNHTCPMessage: %s %s\n", req.Method, req.Params)
+	log.Printf(">>> handleNHTCPMessage: %s %s\n", req.Method, req.Params)
 
 	switch req.Method {
 	case "mining.subscribe":
@@ -222,7 +222,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		}
 
 		if params[1] != "EthereumStratum/1.0.0" {
-			//log.Println("Unsupported stratum version from ", cs.ip)
+			log.Println("Unsupported stratum version from ", cs.ip)
 			return cs.sendTCPNHError(req.Id, "unsupported ethereum version")
 		}
 
