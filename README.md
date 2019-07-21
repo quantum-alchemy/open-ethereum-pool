@@ -14,19 +14,26 @@
 **DISCLAIMER: At the time of this push, the Nicehash support works, but I'm not responsible for any changes Nicehash might do in the future that would break the compatibility. Even so, will do my best to make this work. **
 
 Steps:
-	*General
+
+	* Use base config as a start
     git config --global http.https://gopkg.in.followRedirects true
-    git clone https://github.com/quantum-alchemy/open-ethereum-pool.git
+    
+	* Clone git
+	git clone https://github.com/quantum-alchemy/open-ethereum-pool.git
+	
+	* Go to main folder
     cd open-ethereum-pool
+	
+	* Build the source
     make
 	
-	*Use base config as a start
+	* Use base config as a start
 	cp config.example.json config.json
 	
-	*Edit variables as needed
+	* Edit variables as needed
 	nano config.json
 	
-	*Launch pool
+	* Launch pool
 	./build/bin/open-ethereum-pool config.json
 
 	(Marco P.)
