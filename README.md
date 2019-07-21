@@ -4,6 +4,31 @@
 
 [![Join the chat at https://gitter.im/sammy007/open-ethereum-pool](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sammy007/open-ethereum-pool?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/sammy007/open-ethereum-pool.svg?branch=develop)](https://travis-ci.org/sammy007/open-ethereum-pool) [![Go Report Card](https://goreportcard.com/badge/github.com/sammy007/open-ethereum-pool)](https://goreportcard.com/report/github.com/sammy007/open-ethereum-pool)
 
+### README
+
+**The base script and many of the additional changes are not mine and I'm not claiming ownership for them.**
+
+**My work represented combining the work of the initial Open Ethereum Pool (https://github.com/sammy007/open-ethereum-pool) and adding Nicehash Support on top by leveraging, cleaning and fixing the code from https://github.com/wfr/open-ethereum-pool-nh .**
+**Even still, it took time, effort and money used for actual Nicehash debugging and testing to make this work so any donations to 0xE57CCf712782a454Ac97802Edd40F875d3Ed6806 (ETH) are welcome. Thank you.**
+
+**DISCLAIMER: At the time of this push, the Nicehash support works, but I'm not responsible for any changes Nicehash might do in the future that would break the compatibility. Even so, will do my best to make this work. **
+
+Steps:
+    git config --global http.https://gopkg.in.followRedirects true
+    git clone https://github.com/quantum-alchemy/open-ethereum-pool.git
+    cd open-ethereum-pool
+    make
+	
+	*Use base config as a start
+	cp config.example.json config.json
+	
+	*Edit variables as needed
+	nano config.json
+	
+	*Launch pool
+	./build/bin/open-ethereum-pool config.json
+
+	
 ### Features
 
 **This pool is no longer supported, expect only casual fixes.**

@@ -210,7 +210,7 @@ func (cs *Session) sendJob(s *ProxyServer, id json.RawMessage) error {
 
 func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 	// Handle RPC methods
-	log.Printf(">>> handleNHTCPMessage: %s %s\n", req.Method, req.Params)
+	//log.Printf(">>> handleNHTCPMessage: %s %s\n", req.Method, req.Params)
 
 	switch req.Method {
 	case "mining.subscribe":
