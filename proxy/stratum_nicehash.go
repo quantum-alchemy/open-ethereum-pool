@@ -217,7 +217,7 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		var params []string
 		err := json.Unmarshal(req.Params, &params)
 		if err != nil {
-			//log.Println("Malformed stratum request params from", cs.ip)
+			log.Println("Malformed stratum request params from", cs.ip)
 			return err
 		}
 
@@ -280,7 +280,9 @@ func (cs *Session) handleNHTCPMessage(s *ProxyServer, req *StratumReq) error {
 		// FIX ME: pool shouldn't crash. reject submission instead.
 		splitData := strings.Split(params[0], ".")
 		id := splitData[1]
-
+		log.Println("mining.submit: trying to send data")
+		log.Printf("share (mining.submit JobID received %s != current %s)", params[1], cs.JobDetails.JobID)
+		
 		if cs.JobDetails.JobID != params[1] {
 			log.Printf("Stale share (mining.submit JobID received %s != current %s)", params[1], cs.JobDetails.JobID)
 			return cs.sendTCPNHError(req.Id, []string{
