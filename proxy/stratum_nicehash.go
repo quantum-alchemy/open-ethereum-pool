@@ -86,7 +86,7 @@ func (s *ProxyServer) handleNHTCPClient(cs *Session) error {
 
 		if len(data) > 1 {
 			// DEBUG TRAFFIC
-			log.Printf(">>> %s\n", data)
+			//log.Printf(">>> %s\n", data)
 
 			var req StratumReq
 			err = json.Unmarshal(data, &req)
@@ -142,8 +142,8 @@ func (cs *Session) sendTCPNHError(id json.RawMessage, message interface{}) error
 	resp := JSONRpcRespNH{Id: id, Error: message}
 
 	// DEBUG TRAFFIC
-	foo, _ := json.Marshal(resp)
-	log.Printf("<<< %s", string(foo))
+	//foo, _ := json.Marshal(resp)
+	//log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
@@ -153,8 +153,8 @@ func (cs *Session) sendTCPNHResult(resp JSONRpcRespNH) error {
 	defer cs.Mutex.Unlock()
 	
 	// DEBUG TRAFFIC
-	foo, _ := json.Marshal(resp)
-	log.Printf("<<< %s", string(foo))
+	//foo, _ := json.Marshal(resp)
+	//log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
@@ -164,8 +164,8 @@ func (cs *Session) sendTCPNHReq(resp JSONRpcReqNH) error {
 	defer cs.Mutex.Unlock()
 	
 	// DEBUG TRAFFIC
-	foo, _ := json.Marshal(resp)
-	log.Printf("<<< %s", string(foo))
+	//foo, _ := json.Marshal(resp)
+	//log.Printf("<<< %s", string(foo))
 
 	return cs.enc.Encode(&resp)
 }
